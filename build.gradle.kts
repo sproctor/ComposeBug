@@ -1,18 +1,13 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
-    kotlin("jvm")
-    id("org.jetbrains.compose")
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.compose)
+    alias(libs.plugins.compose.compiler)
 }
 
 group = "com.example"
 version = "1.0-SNAPSHOT"
-
-repositories {
-    mavenCentral()
-    maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
-    google()
-}
 
 dependencies {
     // Note, if you develop a library, you should use compose.desktop.common.
@@ -21,6 +16,7 @@ dependencies {
     // With compose.desktop.common you will also lose @Preview functionality
     implementation(compose.desktop.currentOs)
     implementation(compose.material3)
+    implementation(libs.sqlite.bundled)
 }
 
 compose.desktop {
@@ -33,4 +29,8 @@ compose.desktop {
             packageVersion = "1.0.0"
         }
     }
+}
+
+tasks.wrapper {
+    gradleVersion = "8.8"
 }

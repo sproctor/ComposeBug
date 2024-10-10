@@ -9,6 +9,7 @@ import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.*
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import kotlinx.coroutines.launch
 
 @Composable
@@ -57,6 +58,7 @@ fun App() {
 }
 
 fun main() = application {
+    val sqliteDriver = BundledSQLiteDriver()
     Window(onCloseRequest = ::exitApplication) {
         App()
     }
