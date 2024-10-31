@@ -58,7 +58,12 @@ fun App() {
 }
 
 fun main() = application {
-    val sqliteDriver = BundledSQLiteDriver()
+    try {
+        BundledSQLiteDriver()
+    } catch (e: Throwable) {
+        e.printStackTrace()
+        e.cause?.printStackTrace()
+    }
     Window(onCloseRequest = ::exitApplication) {
         App()
     }
