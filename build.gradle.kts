@@ -49,7 +49,7 @@ compose.desktop {
 }
 
 tasks.wrapper {
-    gradleVersion = "8.8"
+    gradleVersion = "8.10.2"
 }
 
 // region Work around temporary Compose bugs.
