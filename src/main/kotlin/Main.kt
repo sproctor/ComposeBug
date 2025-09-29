@@ -1,70 +1,86 @@
-import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material3.DrawerValue
-import androidx.compose.material3.ModalDrawerSheet
-import androidx.compose.material3.ModalNavigationDrawer
-import androidx.compose.material3.rememberDrawerState
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.window.FrameWindowScope
+import androidx.compose.ui.window.MenuBar
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 
 @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
-@Composable
-@Preview
-fun App() {
+fun main() = application {
+    val showExtraState = remember { MutableStateFlow(true) }
+    val showExtraFlow: Flow<Boolean> = showExtraState
     MaterialTheme {
-        val drawerState = rememberDrawerState(DrawerValue.Closed)
-        ModalNavigationDrawer(
-            drawerState = drawerState,
-            drawerContent = {
-                ModalDrawerSheet {
-                    Text("Drawer Content")
-                }
-            },
-            gesturesEnabled = !drawerState.isOpen,
-        ) {
-            Scaffold(
-                topBar = {
-                    TopAppBar(
-                        title = { Text("Compose bugs example") },
-                        navigationIcon = {
-                            val scope = rememberCoroutineScope()
-                            IconButton(
-                                onClick = {
-                                    scope.launch {
-                                        drawerState.open()
-                                    }
-                                }
-                            ) {
-                                Icon(Icons.Filled.Menu, contentDescription = null)
-                            }
+        Window(onCloseRequest = ::exitApplication) {
+            MyMenu(showExtra = showExtraFlow.collectAsState(false).value, exit = ::exitApplication)
+            Box(Modifier.fillMaxSize()) {
+                val size = calculateWindowSizeClass()
+                Column(modifier = Modifier.align(Alignment.Center)) {
+                    Text(text = "Hello, ${size.widthSizeClass}")
+                    Button(
+                        onClick = {
+                            showExtraState.value = !showExtraState.value
                         }
-                    )
-                }
-            ) {
-                Box(Modifier.fillMaxSize()) {
-                    val size = calculateWindowSizeClass()
-                    Text(
-                        modifier = Modifier.align(Alignment.Center),
-                        text = "Hello, $size",
-                    )
+                    ) {
+                        Text("Toggle menu extra")
+                    }
                 }
             }
         }
     }
 }
 
-fun main() = application {
-    Window(onCloseRequest = ::exitApplication) {
-        App()
+@Composable
+fun FrameWindowScope.MyMenu(showExtra: Boolean, exit: () -> Unit) {
+    MenuBar {
+        Menu("File") {
+            Item("New ...", onClick = { })
+            Item(
+                text = "Settings",
+                onClick = {}
+            )
+            Separator()
+            Item(
+                text = "Exit",
+                enabled = showExtra,
+                onClick = {
+                    exit()
+                }
+            )
+        }
+
+        Menu(
+            text = "Windows",
+            enabled = showExtra,
+        ) {
+            windows.forEach { window ->
+                CheckboxItem(
+                    text = window,
+                    checked = false,
+                    onCheckedChange = {
+                    }
+                )
+            }
+        }
+        Menu("Help") {
+            Item("Updates") {
+            }
+            Item("About") {
+            }
+        }
     }
 }
+
+val windows = listOf("test", "example", "foo", "bar")

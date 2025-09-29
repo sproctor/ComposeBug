@@ -5,25 +5,32 @@
 compose = { id = "org.jetbrains.compose", version.ref = "compose" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 hydraulic-conveyor = { id = "dev.hydraulic.conveyor", version.ref = "conveyor" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 
 [versions]
 
-compose = "1.7.3"
-##   ⬆ = "1.8.0-dev1873"
-##   ⬆ = "1.8.0-dev1875"
-##   ⬆ = "1.8.0-dev1890"
-##   ⬆ = "1.8.0-dev1897"
-##   ⬆ = "1.8.0-dev1899"
-##   ⬆ = "1.8.0-dev1905"
-##   ⬆ = "1.8.0-alpha01"
-##   ⬆ = "1.8.0-alpha02"
+compose = "1.8.2"
+##   ⬆ = "1.9.0-alpha01"
+##   ⬆ = "1.9.0-alpha02"
+##   ⬆ = "1.9.0-alpha03"
+##   ⬆ = "1.9.0-beta01"
+##   ⬆ = "1.9.0-beta02"
+##   ⬆ = "1.9.0-beta03"
+##   ⬆ = "1.9.0-rc01"
+##   ⬆ = "1.9.0-rc02"
+##   ⬆ = "1.9.0"
+##   ⬆ = "1.10.0-alpha01"
 conveyor = "1.12"
-kotlin = "2.1.10"
-##  ⬆ = "2.1.20-Beta1"
-##  ⬆ = "2.1.20-Beta2"
+kotlin = "2.2.0"
+##  ⬆ = "2.2.10-RC"
+##  ⬆ = "2.2.10-RC2"
+##  ⬆ = "2.2.10"
+##  ⬆ = "2.2.20-Beta1"
+##  ⬆ = "2.2.20-Beta2"
+##  ⬆ = "2.2.20-RC"
+##  ⬆ = "2.2.20-RC2"
+##  ⬆ = "2.2.20"
 
 [libraries]
 
