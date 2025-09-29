@@ -4,8 +4,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
-import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
@@ -18,7 +16,6 @@ import androidx.compose.ui.window.application
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 
-@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 fun main() = application {
     val showExtraState = remember { MutableStateFlow(true) }
     val showExtraFlow: Flow<Boolean> = showExtraState
@@ -26,9 +23,8 @@ fun main() = application {
         Window(onCloseRequest = ::exitApplication) {
             MyMenu(showExtra = showExtraFlow.collectAsState(false).value, exit = ::exitApplication)
             Box(Modifier.fillMaxSize()) {
-                val size = calculateWindowSizeClass()
                 Column(modifier = Modifier.align(Alignment.Center)) {
-                    Text(text = "Hello, ${size.widthSizeClass}")
+                    Text(text = "Showing extra: ${showExtraState.value}")
                     Button(
                         onClick = {
                             showExtraState.value = !showExtraState.value

@@ -10,28 +10,9 @@ kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref 
 
 [versions]
 
-compose = "1.8.2"
-##   ⬆ = "1.9.0-alpha01"
-##   ⬆ = "1.9.0-alpha02"
-##   ⬆ = "1.9.0-alpha03"
-##   ⬆ = "1.9.0-beta01"
-##   ⬆ = "1.9.0-beta02"
-##   ⬆ = "1.9.0-beta03"
-##   ⬆ = "1.9.0-rc01"
-##   ⬆ = "1.9.0-rc02"
-##   ⬆ = "1.9.0"
+compose = "1.9.0"
 ##   ⬆ = "1.10.0-alpha01"
 conveyor = "1.12"
-kotlin = "2.2.0"
-##  ⬆ = "2.2.10-RC"
-##  ⬆ = "2.2.10-RC2"
-##  ⬆ = "2.2.10"
-##  ⬆ = "2.2.20-Beta1"
-##  ⬆ = "2.2.20-Beta2"
-##  ⬆ = "2.2.20-RC"
-##  ⬆ = "2.2.20-RC2"
-##  ⬆ = "2.2.20"
+kotlin = "2.2.20"
 
 [libraries]
-
-compose-material3-windowclass = { module = "org.jetbrains.compose.material3:material3-window-size-class", version.ref = "compose" }

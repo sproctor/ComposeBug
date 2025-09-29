@@ -21,7 +21,6 @@ dependencies {
     // With compose.desktop.common you will also lose @Preview functionality
     implementation(compose.desktop.currentOs)
     implementation(compose.material3)
-    implementation(libs.compose.material3.windowclass)
 
     // Needed for Conveyor
     "linuxAmd64"(compose.desktop.linux_x64)
