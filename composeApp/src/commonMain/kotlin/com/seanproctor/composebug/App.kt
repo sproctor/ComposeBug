@@ -33,11 +33,12 @@ import composebug.composeapp.generated.resources.compose_multiplatform
 fun App() {
     MaterialTheme {
         var showContent by remember { mutableStateOf(false) }
+        var expandHeader by remember { mutableStateOf(false) }
         Row {
             WideNavigationRail(
                 header = {
                     if (showContent) {
-                        Box(modifier = Modifier.height(150.dp).background(Color.Red)) {
+                        Box(modifier = Modifier.height(if (!expandHeader) 100.dp else 200.dp).background(Color.Red)) {
                             Text("Header")
                         }
                     }
@@ -67,17 +68,10 @@ fun App() {
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Button(onClick = { showContent = !showContent }) {
-                    Text("Click me!")
+                    Text("Click me to add header")
                 }
-                AnimatedVisibility(showContent) {
-                    val greeting = remember { Greeting().greet() }
-                    Column(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                    ) {
-                        Image(painterResource(Res.drawable.compose_multiplatform), null)
-                        Text("Compose: $greeting")
-                    }
+                Button(onClick = { expandHeader = !expandHeader }) {
+                    Text("Click me to expand/collapse header")
                 }
             }
         }
