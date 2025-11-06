@@ -23,6 +23,10 @@ dependencies {
     implementation(compose.material3)
     implementation(libs.compose.material3.windowclass)
 
+    // coroutines
+//    implementation(libs.kotlinx.coroutines.core)
+//    implementation(libs.kotlinx.coroutines.swing)
+
     // Needed for Conveyor
     "linuxAmd64"(compose.desktop.linux_x64)
     "windowsAmd64"(compose.desktop.windows_x64)

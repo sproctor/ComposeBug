@@ -13,9 +13,12 @@ kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref 
 
 compose = "1.9.2"
 conveyor = "1.12"
+coroutines = "1.9.0"
 kotlin = "2.2.21"
 material3 = "1.9.0"
 
 [libraries]
 
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+kotlinx-coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "coroutines" }
 compose-material3-windowclass = { module = "org.jetbrains.compose.material3:material3-window-size-class", version.ref = "material3" }

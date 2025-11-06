@@ -1,62 +1,38 @@
-import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material3.DrawerValue
-import androidx.compose.material3.ModalDrawerSheet
-import androidx.compose.material3.ModalNavigationDrawer
-import androidx.compose.material3.rememberDrawerState
-import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
-import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
+import androidx.compose.material3.Button
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.window.FrameWindowScope
+import androidx.compose.ui.window.MenuBar
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
-import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
-@Preview
-fun App() {
+fun App(
+    setWindows: (List<String>) -> Unit
+) {
     MaterialTheme {
-        val drawerState = rememberDrawerState(DrawerValue.Closed)
-        ModalNavigationDrawer(
-            drawerState = drawerState,
-            drawerContent = {
-                ModalDrawerSheet {
-                    Text("Drawer Content")
-                }
-            },
-            gesturesEnabled = !drawerState.isOpen,
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    title = { Text("Compose bugs example") },
+                )
+            }
         ) {
-            Scaffold(
-                topBar = {
-                    TopAppBar(
-                        title = { Text("Compose bugs example") },
-                        navigationIcon = {
-                            val scope = rememberCoroutineScope()
-                            IconButton(
-                                onClick = {
-                                    scope.launch {
-                                        drawerState.open()
-                                    }
-                                }
-                            ) {
-                                Icon(Icons.Filled.Menu, contentDescription = null)
-                            }
-                        }
-                    )
-                }
-            ) {
-                Box(Modifier.fillMaxSize()) {
-                    val size = calculateWindowSizeClass()
-                    Text(
-                        modifier = Modifier.align(Alignment.Center),
-                        text = "Hello, $size",
-                    )
+            Box(Modifier.fillMaxSize()) {
+                Button(
+                    onClick = {
+                        setWindows(
+                            listOf("Test1", "Test2", "Test3")
+                        )
+                    }
+                ) {
+                    Text("Add windows")
                 }
             }
         }
@@ -65,6 +41,55 @@ fun App() {
 
 fun main() = application {
     Window(onCloseRequest = ::exitApplication) {
-        App()
+        var windows by remember { mutableStateOf(emptyList<String>()) }
+        AppMenuBar(windows)
+        App(
+            setWindows = { windows = it },
+        )
+    }
+}
+
+@Composable
+fun FrameWindowScope.AppMenuBar(windows: List<String>) {
+    MenuBar {
+        Menu("File") {
+            Item("New window", onClick = { })
+            Item(
+                text = "Settings",
+                onClick = {
+
+                }
+            )
+            Separator()
+            Item(
+                text = "Exit",
+                onClick = {
+
+                },
+            )
+        }
+
+        Menu(
+            text = "Windows",
+            enabled = windows.isNotEmpty(),
+        ) {
+            windows.sortedBy { it }.forEach { window ->
+                CheckboxItem(
+                    text = window,
+                    checked = false,
+                    onCheckedChange = {
+
+                    }
+                )
+            }
+        }
+        Menu("Help") {
+            Item("Updates") {
+
+            }
+            Item("About") {
+
+            }
+        }
     }
 }
