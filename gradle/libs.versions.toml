@@ -11,20 +11,11 @@ kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref 
 
 [versions]
 
-compose = "1.7.3"
-##   ⬆ = "1.8.0-dev1873"
-##   ⬆ = "1.8.0-dev1875"
-##   ⬆ = "1.8.0-dev1890"
-##   ⬆ = "1.8.0-dev1897"
-##   ⬆ = "1.8.0-dev1899"
-##   ⬆ = "1.8.0-dev1905"
-##   ⬆ = "1.8.0-alpha01"
-##   ⬆ = "1.8.0-alpha02"
+compose = "1.9.2"
 conveyor = "1.12"
-kotlin = "2.1.10"
-##  ⬆ = "2.1.20-Beta1"
-##  ⬆ = "2.1.20-Beta2"
+kotlin = "2.2.21"
+material3 = "1.9.0"
 
 [libraries]
 
-compose-material3-windowclass = { module = "org.jetbrains.compose.material3:material3-window-size-class", version.ref = "compose" }
+compose-material3-windowclass = { module = "org.jetbrains.compose.material3:material3-window-size-class", version.ref = "material3" }
