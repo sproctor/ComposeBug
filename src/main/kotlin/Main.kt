@@ -14,7 +14,8 @@ import androidx.compose.ui.window.application
 
 @Composable
 fun App(
-    setWindows: (List<String>) -> Unit
+    enabled: Boolean,
+    setEnabled: (Boolean) -> Unit
 ) {
     MaterialTheme {
         Scaffold(
@@ -27,12 +28,10 @@ fun App(
             Box(Modifier.fillMaxSize()) {
                 Button(
                     onClick = {
-                        setWindows(
-                            listOf("Test1", "Test2", "Test3")
-                        )
+                        setEnabled(!enabled)
                     }
                 ) {
-                    Text("Add windows")
+                    Text(if(enabled) "Disable" else "Enable")
                 }
             }
         }
@@ -41,54 +40,27 @@ fun App(
 
 fun main() = application {
     Window(onCloseRequest = ::exitApplication) {
-        var windows by remember { mutableStateOf(emptyList<String>()) }
-        AppMenuBar(windows)
+        var enabled by remember { mutableStateOf(false) }
+        AppMenuBar(enabled)
         App(
-            setWindows = { windows = it },
+            enabled,
+            setEnabled = { enabled = it }
         )
     }
 }
 
 @Composable
-fun FrameWindowScope.AppMenuBar(windows: List<String>) {
+fun FrameWindowScope.AppMenuBar(enabled: Boolean) {
     MenuBar {
-        Menu("File") {
-            Item("New window", onClick = { })
-            Item(
-                text = "Settings",
-                onClick = {
-
-                }
-            )
-            Separator()
-            Item(
-                text = "Exit",
-                onClick = {
-
-                },
-            )
-        }
-
         Menu(
-            text = "Windows",
-            enabled = windows.isNotEmpty(),
+            text = "Menu",
+            enabled = enabled,
         ) {
-            windows.sortedBy { it }.forEach { window ->
-                CheckboxItem(
+            listOf("Test1", "Test2", "Test3").forEach { window ->
+                Item(
                     text = window,
-                    checked = false,
-                    onCheckedChange = {
-
-                    }
+                    onClick = {}
                 )
-            }
-        }
-        Menu("Help") {
-            Item("Updates") {
-
-            }
-            Item("About") {
-
             }
         }
     }
