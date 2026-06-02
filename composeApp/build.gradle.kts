@@ -39,6 +39,9 @@ kotlin {
         jvmMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutinesSwing)
+            implementation(libs.jewel.intUi.standalone)
+            implementation(libs.jewel.intUi.decoratedWindow)
+            implementation(libs.intellij.platform.icons)
         }
     }
 }

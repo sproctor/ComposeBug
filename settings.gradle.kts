@@ -25,6 +25,9 @@ dependencyResolutionManagement {
             }
         }
         mavenCentral()
+        maven("https://cache-redirector.jetbrains.com/intellij-repository/releases") {
+            mavenContent { includeGroup("com.jetbrains.intellij.platform") }
+        }
     }
 }
 
